@@ -1,0 +1,4 @@
+{
+  "mongoURI": "mongodb://root:password@localhost:27017/contacts?retryWrites=true&authSource=admin",
+  "jwtSecret": "super_superb_secret"
+}
