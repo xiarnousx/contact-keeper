@@ -2,11 +2,13 @@ import { useContext } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import AuthContext from "../../contexts/auth/authContext";
+import ContactContext from "../../contexts/contact/contactContext";
 
-const Navbar = ({ title, icon }) => {
+const Navbar = ({ title = "Contact Keeper", icon = "fas fa-id-card-alt" }) => {
   const { isAuthenticated, logout, user } = useContext(AuthContext);
-
+  const { clearContacts } = useContext(ContactContext);
   const onLogout = () => {
+    clearContacts();
     logout();
   };
 
@@ -43,16 +45,6 @@ const Navbar = ({ title, icon }) => {
       </ul>
     </div>
   );
-};
-
-Navbar.propTypes = {
-  title: PropTypes.string.isRequired,
-  icon: PropTypes.string,
-};
-
-Navbar.defaultProps = {
-  title: "Contact Keeper",
-  icon: "fas fa-id-card-alt",
 };
 
 export default Navbar;

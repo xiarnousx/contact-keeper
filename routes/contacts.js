@@ -9,7 +9,7 @@ const router = express.Router();
 // @route   GET  api/contacts
 // @desc    Get All user contacts
 // @access  Private
-router.post("/", authMiddleware, async (req, res) => {
+router.get("/", authMiddleware, async (req, res) => {
   try {
     const contacts = await Contact.find({ user: req.user.id }).sort({
       date: -1,
@@ -100,7 +100,7 @@ router.delete("/:id", authMiddleware, async (req, res) => {
     if (contact.user.toString() !== req.user.id) {
       return res.status(401).json({ msg: "Not Authorized" });
     }
-    await Contact.findByIdAndRemove(req.params.id);
+    await Contact.findByIdAndDelete(req.params.id);
     res.json({ msg: "Contact removed!" });
   } catch (error) {
     console.error(error.message);
